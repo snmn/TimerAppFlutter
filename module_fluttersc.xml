@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_fluttersc" default="compile.module.fluttersc">
+  <dirname property="module.fluttersc.basedir" file="${ant.file.module_fluttersc}"/>
+  
+  <property name="module.jdk.home.fluttersc" value=""/>
+  <property name="module.jdk.bin.fluttersc" value=""/>
+  <property name="module.jdk.classpath.fluttersc" value=""/>
+  
+  <property name="compiler.args.fluttersc" value="-encoding UTF-8 -source 12 -target 12 ${compiler.args}"/>
+  
+  <property name="fluttersc.output.dir" value="${module.fluttersc.basedir}/out/production/fluttersc"/>
+  <property name="fluttersc.testoutput.dir" value="${module.fluttersc.basedir}/out/test/fluttersc"/>
+  
+  <path id="fluttersc.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="fluttersc.module.production.classpath">
+    <path refid="library.dart_sdk.classpath"/>
+    <path refid="library.dart_packages.classpath"/>
+  </path>
+  
+  <path id="fluttersc.runtime.production.module.classpath">
+    <pathelement location="${fluttersc.output.dir}"/>
+    <path refid="library.dart_sdk.classpath"/>
+    <path refid="library.dart_packages.classpath"/>
+  </path>
+  
+  <path id="fluttersc.module.classpath">
+    <pathelement location="${fluttersc.output.dir}"/>
+    <path refid="library.dart_sdk.classpath"/>
+    <path refid="library.dart_packages.classpath"/>
+  </path>
+  
+  <path id="fluttersc.runtime.module.classpath">
+    <pathelement location="${fluttersc.testoutput.dir}"/>
+    <pathelement location="${fluttersc.output.dir}"/>
+    <path refid="library.dart_sdk.classpath"/>
+    <path refid="library.dart_packages.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.fluttersc">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.fluttersc">
+    <patternset refid="excluded.from.module.fluttersc"/>
+  </patternset>
+  
+  
+  <target name="compile.module.fluttersc" depends="compile.module.fluttersc.production,compile.module.fluttersc.tests" description="Compile module fluttersc"/>
+  
+  <target name="compile.module.fluttersc.production" depends="register.custom.compilers" description="Compile module fluttersc; production classes"/>
+  
+  <target name="compile.module.fluttersc.tests" depends="register.custom.compilers,compile.module.fluttersc.production" description="compile module fluttersc; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.fluttersc" description="cleanup module">
+    <delete dir="${fluttersc.output.dir}"/>
+    <delete dir="${fluttersc.testoutput.dir}"/>
+  </target>
+</project>
